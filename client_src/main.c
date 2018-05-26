@@ -10,6 +10,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include "../include/server.h"
 #include "../include/client.h"
 
 void	write_separator()
@@ -34,7 +35,7 @@ int main(int ac, char **av)
 {
 	if (ac != 2)
 		return 84;
-
+	client(av);
 	initscr();
 	write_separator();
 	move(LINES -1,0);
