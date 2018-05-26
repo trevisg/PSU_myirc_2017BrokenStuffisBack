@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2018
-** MY_FTP
+** MY_IRC
 ** File description:
-** my_ftp server header file
+** my_irc server header file
 */
 
 #ifndef _GNU_SOURCE
@@ -47,11 +47,13 @@
 	#define RESP_FMT "%d %s\r\n"
 	/** Dummy hack to remove newline char from cmd buffer
 	* see ```man strcspn()```
+	* @deprecated if multiple commands sent in one buffer
+	* this dirty hack delete the rest of the message
 	*/
 	#define RM_CR(a) a[strcspn(a, "\r")] = 0;
 	#define RM_NL(a) a[strcspn(a, "\n")] = 0;
 	/** Argument format typedef as per RFC request */
-	typedef char cmdargs[MAXARGS][MAXARGSIZE];
+	typedef char **cmdargs;
 
 	/** See @file server_src/rfc_cmds0.c */
 	int join(cmdargs channame, int clifd);
@@ -149,6 +151,9 @@
 	int	set_iface(adrinf *hints, adrinf **res, const char *port);
 	int	set_clifd(int clisock, int epollfd, struct epoll_event *ev);
 
+	/** See server_src/server_cmdparser.c */
+	int	get_methods(char *req, int clifd);
+
 	/** See server_src/logs_helpers.c */
 	int	logthisevent(const char etype, t_serv *all);
 	int	initlogs(const char **paths, t_log *ptr);
@@ -159,6 +164,9 @@
 	t_userlist	*get_new_userlist(t_user *usr);
 	void		*push_back(t_userlist *head, t_userlist *users);
 	void		print_users(t_userlist *liste);
+
+	/** see server_src/sig_handler.c */
+	void	sig_handler(int signo);
 
 	#endif /* !SERVER_H_ */
 
