@@ -24,8 +24,10 @@ CLIENTOBJS	:= $(CLIENTSRC:.c=.o)
 
 ## Sources and rules for server
 SERVER_SRCS	= logs_helpers.c \
+		sig_handler.c \
 		server_init.c \
 		server_main.c \
+		server_cmdparser.c \
 		server_decls.c \
 		client_list.c \
 		rfc_cmds0.c
