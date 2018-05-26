@@ -15,7 +15,8 @@ static void free_tokens(cmdargs tkns)
 	int i;
 
 	for (i = 0; tkns[i]; ++i) {
-		free(tkns[i]);
+		if (tkns[i][0])
+			free(tkns[i]);
 	}
 }
 
@@ -42,6 +43,27 @@ static char **get_tokens(char *req)
 	return (tokens);
 }
 
+static char **get_commands(char *req)
+{
+	int i = 0;
+	char *str = NULL;
+	char *com = NULL;
+	char **command = calloc(0, MAXARGS * sizeof(*command));
+
+	str = strdup(req);
+	com = strtok(str, "\r\n");
+	while (com) {
+		printf("comandParser :::%s\n", com);
+		command[i] = malloc(MAXARGSIZE * sizeof(*command[i]));
+		strncpy(command[i], com, MAXARGSIZE);
+		com = strtok(NULL, "\r\n");
+		i++;
+	}
+	//command[i + 1] = NULL; // to remoove
+	free(str);
+	return command;
+}
+
 /** Match all methods in G_CMDS for a given req command string
 * @param req the requested command on format 'CMD <space> [ARGS]'
 * @param clifd the client socket fd
@@ -49,20 +71,24 @@ static char **get_tokens(char *req)
 int	get_methods(char *req, int clifd)
 {
 	int index = 0;
-	int i = 0;
 	cmdargs args;
+	char **tmp = NULL;
+	int j = 0;
 
-	args = get_tokens(req);
-	print_arg(args);
-	for (i = 0; args[i]; ++i) {
-		for (index = 0; G_PROTOS[index]; ++index) {
-			if ((strcasestr(args[i], G_PROTOS[index]))) {
-				if (G_CMDS[index] != NULL) {
-					index = G_CMDS[index](args, clifd);
-					break;
-				}
+	tmp = get_commands(req);
+	while (tmp[j])
+	{
+	args = get_tokens(tmp[j]);
+	//print_arg(args);
+	for (index = 0; G_PROTOS[index]; ++index) {
+		if ((strcasestr(args[0], G_PROTOS[index]))) {
+			if (G_CMDS[index] != NULL) {
+				index = G_CMDS[index](args, clifd);
+				break;
 			}
 		}
+	}
+	j++;
 	}
 	memset(req, 0, BUF_SIZE);
 	free_tokens(args);
