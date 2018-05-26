@@ -53,7 +53,7 @@ void *push_back(t_list *head, t_list *new)
         return (head);
 }
 
-void delete_el(t_list *list, char *name)
+void 	delete_el(t_list *list, char *name)
 {
 	t_list *tmp = list;
 
@@ -63,7 +63,8 @@ void delete_el(t_list *list, char *name)
 			tmp->prev->next = tmp->next;
 			tmp->next->prev = tmp->prev;
 			free(tmp->data);
-			return;
+			free(tmp);
+			break;
 		}
 		tmp = tmp->next;
 	}
