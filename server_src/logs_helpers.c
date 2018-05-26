@@ -8,10 +8,22 @@
 #include "../include/server.h"
 #include <unistd.h>
 
+/** Print the user list to standard output
+* @note for debug only
+*/
+void	print_users(t_userlist *liste)
+{
+	printf("\t\tUSERS LIST :\n");
+	for (t_userlist *tmp = liste; tmp; tmp = tmp->next) {
+		printf("User : [%s], Real Name : [%s]\n",
+		tmp->user->nick, tmp->user->rname);
+	}
+}
+
 /** Dummy print 2d Array containing received cmd args
 * @param args the args array to print
 */
-void print_arg(char args[MAXARGS][MAXARGSIZE])
+void print_arg(cmdargs args)
 {
 	for (int i = 0; args[i][0]; i++) {
 		printf("arg[%d] : [%s]\n", i, args[i]);
