@@ -49,11 +49,35 @@ void *push_back(t_userlist *head, t_userlist *new)
 	return (head);
 }
 
-void	print_users(t_userlist *liste)
+void 	*remove_disconnected_user(t_userlist *liste, char *nick)
 {
-	printf("\t\tUSERS LIST :\n");
-	for (t_userlist *tmp = liste; tmp; tmp = tmp->next) {
-		printf("User : [%s], Real Name : [%s]\n",
-		tmp->user->nick, tmp->user->rname);
+	t_userlist *tmp = NULL;
+
+	if (!strcmp(liste->user->nick, nick)) {
+		free(liste->user->nick);
+		free(liste->user->rname);
+		free(liste->user);
+		liste = liste->next;
+		free(liste);
+	} else {
+		for (tmp = liste; tmp; tmp = tmp->next) {
+			if (!strcmp(tmp->user->nick, nick)) {
+				printf("%s finded\n", nick);
+				break;
+			}
+		}
 	}
+	return (liste);
+}
+
+void	clean_list(t_userlist *liste)
+{
+	while (liste) {
+                free(liste->user->nick);
+		free(liste->user->rname);
+		free(liste->user);
+                t_userlist *next = liste->next;
+                free(liste);
+                liste = next;
+        }
 }
