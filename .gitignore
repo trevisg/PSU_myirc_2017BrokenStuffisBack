@@ -1,6 +1,6 @@
 *.o
 *test
-*.txt
+log.txt
 a.out
 */a.out
 server
