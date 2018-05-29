@@ -42,9 +42,12 @@
 	* to rename all
 	*/
 	typedef char ** cmdargs;
+	/** For clarity (got values from /usr/include/netdb.h) */
+	#define NI_MAXSERV 32
+	/** Idem */
+	#define NI_MAXHOST 1025
 	/** Yess useless so mandatory */
 	#define EVER ;;
-
 	/** Only here for code clarity and lisibility
 	* @TODO : still missing lot of rfc command see subject, rfc or
 	* this [gist](https://gist.github.com/xero/2d6e4b061b4ecbeb9f99)
@@ -78,7 +81,7 @@
 		mode_t		dir_mode;
 	}				t_log;
 
-	/** Yeah simplification */
+	/** To avoid too long line epitech norm error  */
 	typedef struct addrinfo adrinf;
 
 	/** Main server structure */
