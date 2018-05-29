@@ -11,7 +11,7 @@ DOXYGEN		= doxygen
 
 RM      	= rm -f
 
-CFLAGS		+= -I./include -Wall -Werror -Wextra
+CFLAGS		+= -I./include -Wall -Werror -Wextra -Wpedantic -std=gnu89
 
 CRITFLAGS	= -Wall -Werror -Wextra -lcriterion -coverage
 
