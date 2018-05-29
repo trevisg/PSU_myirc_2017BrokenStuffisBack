@@ -95,11 +95,13 @@ void	*remove_user(t_userlist *list, int clifd)
 */
 void	free_userlist(t_userlist *list)
 {
+	t_userlist *next;
+
 	while (list) {
 		free(list->user->rname);
 		free(list->user->nick);
 		free(list->user);
-		t_userlist *next = list->next;
+		next = list->next;
 		free(list);
 		list = next;
 	}

@@ -16,8 +16,9 @@
 t_user	*find_user_by_fd(t_userlist *list, int clifd)
 {
 	t_user *usr = NULL;
+	t_userlist *tmp = NULL;
 
-	for (t_userlist *tmp = list; tmp; tmp = tmp->next) {
+	for (tmp = list; tmp; tmp = tmp->next) {
 		if (tmp->user->clifd == clifd) {
 			usr = tmp->user;
 			break;
@@ -34,8 +35,9 @@ t_user	*find_user_by_fd(t_userlist *list, int clifd)
 t_channel	*get_chan_by_name(t_channel *list, char *channame)
 {
 	t_channel *rt = NULL;
+	t_channel *tmp = NULL;
 
-	for (t_channel *tmp = list; tmp; tmp = tmp->next) {
+	for (tmp = list; tmp; tmp = tmp->next) {
 		if (!strcmp(tmp->channame, channame)) {
 			rt = tmp;
 			break;

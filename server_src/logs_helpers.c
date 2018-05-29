@@ -16,8 +16,10 @@
 */
 void	print_users_in_chans(t_channel *chanlist, int index)
 {
+	t_channel *tmp = NULL;
+
 	if (index != PING) {
-		for (t_channel *tmp = chanlist; tmp; tmp = tmp->next) {
+		for (tmp = chanlist; tmp; tmp = tmp->next) {
 			printf("\tChannel : [%s]\n", tmp->channame);
 			print_users(tmp->users);
 		}
@@ -29,8 +31,10 @@ void	print_users_in_chans(t_channel *chanlist, int index)
 */
 void	print_users(t_userlist *list)
 {
+	t_userlist *tmp = NULL;
+
 	printf("\t\tUSERS LIST :\n");
-	for (t_userlist *tmp = list; tmp; tmp = tmp->next) {
+	for (tmp = list; tmp; tmp = tmp->next) {
 		printf("User : [%s], Real Name : [%s]\n",
 		tmp->user->nick, tmp->user->rname);
 	}

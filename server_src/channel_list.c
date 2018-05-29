@@ -73,9 +73,11 @@ void	remove_channel(t_channel *list, char *channame)
 */
 void	free_channel_list(t_channel *list)
 {
+	t_channel *next = NULL;
+
 	while (list) {
 		free_userlist(list->users);
-		t_channel *next = list->next;
+		next = list->next;
 		free(list);
 		list = next;
 	}

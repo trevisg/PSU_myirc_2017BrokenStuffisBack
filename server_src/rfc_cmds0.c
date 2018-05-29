@@ -20,6 +20,7 @@ void	*join(cmdargs args, int clifd, t_channel *chans)
 {
 	t_user *usr = find_user_by_fd(chans->users, clifd);
 	t_userlist *list = get_new_userlist(usr);
+	t_userlist *b = NULL;
 	t_channel *rchan = get_chan_by_name(chans, args[1]);
 
 	if (!rchan) {
@@ -28,7 +29,7 @@ void	*join(cmdargs args, int clifd, t_channel *chans)
 	} else if (!find_user_by_fd(rchan->users, clifd)) {
 		rchan->users = insert_back_user(rchan->users, list);
 	}
-	for (t_userlist *b = rchan->users; b; b = b->next) {
+	for (b = rchan->users; b; b = b->next) {
 		dprintf(b->user->clifd, ":%s JOIN :%s\r\n", usr->nick, args[1]);
 	}
 	dprintf(clifd, ":server 331\r\n%s: no topic is set\r\n", args[1]);
@@ -94,7 +95,9 @@ void     *user(cmdargs args, int clifd, t_channel *chans)
 void	*quit(cmdargs args, int clifd, t_channel *chans)
 {
 	t_user *usr = find_user_by_fd(chans->users, clifd);
-	for (t_userlist *b = chans->users; b; b = b->next) {
+	t_userlist *b = NULL;
+
+	for (b = chans->users; b; b = b->next) {
 		dprintf(b->user->clifd, ":%s QUIT :%s\r\n", usr->nick, args[1]);
 	}
 	chans->users = remove_user(chans->users, clifd);

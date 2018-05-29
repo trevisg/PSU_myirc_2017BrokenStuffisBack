@@ -74,9 +74,10 @@ static int 	evhandler(t_serv *all, int newfd)
 static int	getactiveclients(t_serv *all, char **args)
 {
 	int clifd = -1;
+	int n = 0;
 	static int connected;
 
-	for (int n = 0; n < all->nfds; ++n) {
+	for (n = 0; n < all->nfds; ++n) {
 		clifd = all->events[n].data.fd;
 		if (clifd == all->listen_sock) {
 			initco(all, args, &connected);

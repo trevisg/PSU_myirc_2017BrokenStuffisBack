@@ -17,10 +17,11 @@
 */
 static char	*get_full_msg(char **args)
 {
+	int i = 0;
 	char *msg = malloc(BUF_SIZE);
 
 	memset(msg, 0, BUF_SIZE);
-	for (int i = 2; args[i]; ++i) {
+	for (i = 2; args[i]; ++i) {
 		strcat(msg, args[i]);
 		strcat(msg, " ");
 	}
@@ -42,9 +43,10 @@ void	*privmsg(cmdargs args, int clifd, t_channel *chans)
 	t_user *from = find_user_by_fd(chans->users, clifd);
 	t_channel *reqchan = get_chan_by_name(chans, args[1]);
 	t_userlist *broadcast_list = reqchan->users;
+	t_userlist *tmp = NULL;
 	char *fullmsg = get_full_msg(args);
 
-	for (t_userlist *tmp = broadcast_list; tmp; tmp = tmp->next) {
+	for (tmp = broadcast_list; tmp; tmp = tmp->next) {
 		if (tmp->user->clifd != clifd) {
 			dprintf(tmp->user->clifd, ":%s PRIVMSG %s %s\r\n",
 			from->nick, args[1], fullmsg);
