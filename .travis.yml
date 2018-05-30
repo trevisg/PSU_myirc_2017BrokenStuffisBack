@@ -3,5 +3,9 @@ install:
         - sudo add-apt-repository --yes ppa:snaipewastaken/ppa
         - sudo apt-get update
         - sudo apt-get install -y criterion-dev
+        - sudo ldconfig
+        - git clone --recursive https://github.com/Snaipe/Criterion.git
+        - cd Criterion && mkdir build && cd build && cmake .. && cmake --build .
+        - make install
 
 script:  make test && ./test_run --verbose

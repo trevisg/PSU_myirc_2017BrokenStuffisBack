@@ -13,7 +13,7 @@ RM      	= rm -f
 
 CFLAGS		+= -I./include -Wall -Werror -Wextra -std=gnu99
 
-CRITFLAGS	= -Wall -Werror -Wextra -lcriterion -coverage
+CRITFLAGS	= $(CFLAGS) -lcriterion -coverage
 
 ## Sources and rules for irc client
 CLIENT_SRCS	= client.c
