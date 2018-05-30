@@ -1,4 +1,6 @@
 *.o
+*.gcda
+*.gcno
 *test
 log.txt
 a.out
