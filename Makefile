@@ -43,6 +43,7 @@ STESTSRC	= $(addprefix server_src/, $(SERVER_SRCS)) \
 		tests/tests-USERLIST_FUNCTION.c \
 		tests/tests-SIGHANDLER_FUNCTION.c
 
+
 SERVEROBJS	:= $(SERVERSRC:.c=.o)
 
 #Binaries names
@@ -70,7 +71,8 @@ fclean: 	clean
 re:		fclean all
 
 test:
-		$(CC) $(CRITFLAGS) $(STESTSRC) -o test_run
+		$(CC) $(CRITFLAGS) -D TEST $(SERVERSRC) -o server
+		$(CC) $(CRITFLAGS) -D TEST $(STESTSRC) -o test_run
 
 doc:
 		$(DOXYGEN) bonus/Doxyfile
