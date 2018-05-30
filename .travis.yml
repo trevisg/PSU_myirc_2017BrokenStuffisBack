@@ -8,4 +8,4 @@ before_install:
         - cd Criterion && mkdir build && cd build && cmake .. && cmake --build .
         - sudo make install && cd && cd
 
-script:  make test && ./test_run --verbose
+script:  pwd && make test && ./test_run --verbose
