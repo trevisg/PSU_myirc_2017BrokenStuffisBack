@@ -22,7 +22,7 @@ Test(tests_USERLIST_FUNCTIONS, get_new_user)
 	cr_assert_str_not_empty(mockuser->rname, "Assert usr->rname to be a non empty string");
 	cr_assert_eq(mockuser->clifd, 2, "Assert usr->clifd = 2");
 	cr_assert_str_eq(mockuser->nick, "Mockme", "Assert usr->nick = \"Mockme\"");
-	cr_assert_str_eq(mockuser->rname, ":Mock User""Assert usr->rname = \":Mock User\"");
+	cr_assert_str_eq(mockuser->rname, ":Mock User", "Assert usr->rname = \":Mock User\"");
 }
 
 Test(tests_USERLIST_FUNCTIONS, get_new_user_node)
