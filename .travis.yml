@@ -6,6 +6,6 @@ before_install:
         - sudo ldconfig
         - git clone --recursive https://github.com/Snaipe/Criterion.git
         - cd Criterion && mkdir build && cd build && cmake .. && cmake --build .
-        - sudo make install && cd && cd
+        - sudo make install && cd ../..
 
 script:  pwd && make test && ./test_run --verbose
