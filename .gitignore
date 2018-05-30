@@ -2,7 +2,7 @@
 *.gcda
 *.gcno
 *test
-log.txt
+*.log
 a.out
 */a.out
 server
