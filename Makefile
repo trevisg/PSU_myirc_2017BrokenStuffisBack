@@ -40,7 +40,8 @@ SERVERSRC	= $(addprefix server_src/, $(SERVER_SRCS)) \
 
 STESTSRC	= $(addprefix server_src/, $(SERVER_SRCS)) \
 		tests/tests-config_output.c \
-		tests/tests-USERLIST_FUNCTION.c
+		tests/tests-USERLIST_FUNCTION.c \
+		tests/tests-SIGHANDLER_FUNCTION.c
 
 SERVEROBJS	:= $(SERVERSRC:.c=.o)
 
