@@ -25,7 +25,7 @@ CLIENTOBJS	:= $(CLIENTSRC:.c=.o)
 ## Sources and rules for server
 SERVER_SRCS	= logs_helpers.c \
 		server_init.c \
-		server_main.c \
+		server_loop.c \
 		server_decls.c \
 		sig_handler.c \
 		user_list.c \
@@ -35,7 +35,12 @@ SERVER_SRCS	= logs_helpers.c \
 		rfc_cmds0.c \
 		rfc_cmds1.c
 
-SERVERSRC	= $(addprefix server_src/, $(SERVER_SRCS))
+SERVERSRC	= $(addprefix server_src/, $(SERVER_SRCS)) \
+		server_src/server_main.c
+
+STESTSRC	= $(addprefix server_src/, $(SERVER_SRCS)) \
+		tests/tests-config_output.c \
+		tests/tests-USERLIST_FUNCTION.c
 
 SERVEROBJS	:= $(SERVERSRC:.c=.o)
 
@@ -62,6 +67,9 @@ fclean: 	clean
 		$(RM) $(SERVER)
 
 re:		fclean all
+
+test:
+		$(CC) $(CRITFLAGS) $(STESTSRC) -o test_run
 
 doc:
 		$(DOXYGEN) bonus/Doxyfile
