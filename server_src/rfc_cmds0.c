@@ -82,7 +82,7 @@ void     *user(cmdargs args, int clifd, t_channel *chans)
 {
 	char *banneer = "|| Welcome to BrokenIRC Network || ";
 
-	if (get_size(args) == 5) {
+	if (get_size(args) >= 5 && get_size(args) <= MAXARGS) {
 		t_user *usr = get_new_user(clifd, args);
 		t_userlist *list = get_new_userlist(usr);
 		chans->users = insert_back_user(chans->users, list);
