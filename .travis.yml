@@ -8,4 +8,7 @@ before_install:
         - cd Criterion && mkdir build && cd build && cmake .. && cmake --build .
         - sudo make install && cd ../..
 
-script:  pwd && make test && ./test_run --verbose
+script:  make test && ./test_run --verbose && echo testpassed
+
+after_success:
+        - bash <(curl -s https://codecov.io/bash)
