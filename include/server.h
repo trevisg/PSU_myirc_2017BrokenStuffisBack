@@ -125,6 +125,9 @@
 		struct s_channel 	*next;
 	}				t_channel;
 
+	/** See server_src/server_loop.c */
+	int	server(char **args);
+
 	/** See server_src/inits.c */
 	int	set_sockfd(t_serv *all);
 	int	set_epoll(t_serv *all);

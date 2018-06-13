@@ -1,2 +1,14 @@
 langage: c
-script: make && make clean
+before_install:
+        - sudo add-apt-repository --yes ppa:snaipewastaken/ppa
+        - sudo apt-get update
+        - sudo apt-get install -y criterion-dev
+        - sudo ldconfig
+        - git clone --recursive https://github.com/Snaipe/Criterion.git
+        - cd Criterion && mkdir build && cd build && cmake .. && cmake --build .
+        - sudo make install && cd ../..
+
+script:  make test && ./test_run --verbose ; echo testpassed
+
+after_success:
+        - bash <(curl -s https://codecov.io/bash)

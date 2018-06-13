@@ -1,7 +1,10 @@
 *.o
+*.gcda
+*.gcno
 *test
-*.txt
+*.log
 a.out
 */a.out
 server
 client
+test_run
